@@ -42,6 +42,28 @@ set -U private_show_count false
 set -U private_fish_autoclear true
 ```
 
+### 🔒 Privacy Emojis
+
+Here are some emojis you can use for privacy indicators:
+
+- 👻 **Ghost (default)**
+- 🔒 Lock
+- 🔑 Key
+- 🗝️ Old Key
+- 🔐 Closed Lock With Key
+- 🛡️ Shield
+- 🕵️‍♂️ Detective
+- 🕶️ Sunglasses / Incognito
+- 🏠 House / Private Space
+- 📝 Hidden Note
+- 🙈 See-No-Evil Monkey
+- 🐟 Fish
+- 🐠 Tropical Fish
+- 🐡 Pufferfish
+- 🐬 Dolphin
+- 🦈 Shark
+- 🐙 Octopus
+
 ---
 
 ## 💡 Usage
