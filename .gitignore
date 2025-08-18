@@ -1,0 +1,9 @@
+*.DS_Store
+*.dll
+*.exe
+Desktop.ini
+Thumbs.db
+
+.vscode
+/.cache
+.idea/
