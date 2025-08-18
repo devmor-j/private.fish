@@ -77,7 +77,7 @@ fish -P
 
 2. You’ll see the ghost icon `👻` in your prompt.
 3. If you have multiple commands recorded in the session and `private_show_count=true`, the icon will show the count, e.g., `👻3`.
-4. Each terminal is independent, so counts don’t interfere with each other.
+4. ~~Each terminal is independent, so counts don’t interfere with each other.~~
 
 <!-- ---
 
@@ -90,4 +90,6 @@ fish -P
 
 ## 📝 License
 
-MIT License. Free to use and modify. This plugin was developed with AI assistance; Expect bugs and compatibility issues until I finish testing this plugin manually.
+MIT License. Free to use and modify.
+
+This plugin was developed with AI assistance; Expect bugs and compatibility issues until they are fixed.
