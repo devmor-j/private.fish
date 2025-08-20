@@ -1,8 +1,13 @@
 function _private_cleanup --on-event fish_exit
-    # Remove PID from sessions
-    if test -f $private_state/sessions
-        grep -v "^$fish_pid\$" $private_state/sessions >$private_state/sessions.tmp
-        mv $private_state/sessions.tmp $private_state/sessions
+    # Remove PID from this terminal's sessions file
+    if test -n "$private_sessions_file" -a -f $private_sessions_file
+        grep -v "^$fish_pid\$" $private_sessions_file >$private_sessions_file.tmp
+        mv $private_sessions_file.tmp $private_sessions_file
+
+        # If now empty, remove the file to avoid clutter
+        if test ! -s $private_sessions_file
+            rm -f $private_sessions_file
+        end
     end
 
     # Clear only lines written in private mode

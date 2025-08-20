@@ -19,11 +19,45 @@ else
 end
 mkdir -p $private_state
 
+# Compute a per-terminal/session key
+function __private_tty_id --description "Stable id for current terminal session"
+    # Prefer terminal-provided session IDs when available (macOS Terminal/iTerm)
+    if set -q TERM_SESSION_ID
+        echo $TERM_SESSION_ID
+        return
+    end
+    if set -q ITERM_SESSION_ID
+        echo $ITERM_SESSION_ID
+        return
+    end
+
+    # Fallback to controlling TTY (e.g., /dev/pts/3 or ttys001)
+    set -l t (command tty 2>/dev/null)
+    if test $status -eq 0 -a -n "$t"
+        # Strip directory to make a filename-friendly id
+        string replace -r '.*/' '' -- $t
+        return
+    end
+
+    echo unknown
+end
+
+# Per-terminal sessions file (e.g., $private_state/sessions.pts3)
+set -g private_tty_id (__private_tty_id)
+set -g private_sessions_file "$private_state/sessions.$private_tty_id"
+
 # Detect private session (mark active and record session)
 if status --is-interactive
     if set -q fish_private_mode
         set -g private_active 1
-        echo $fish_pid >>$private_state/sessions
+        # Append this PID once to the per-terminal file
+        if test -f $private_sessions_file
+            if not grep -q "^$fish_pid\$" $private_sessions_file
+                echo $fish_pid >>$private_sessions_file
+            end
+        else
+            echo $fish_pid >$private_sessions_file
+        end
     end
 end
 
