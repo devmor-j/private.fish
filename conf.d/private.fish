@@ -2,6 +2,9 @@
 if not set -q private_symbol
     set -U private_symbol "👻"
 end
+if not set -q root_symbol
+    set -U root_symbol "🔥"
+end
 if not set -q private_show_count
     set -U private_show_count true
 end
@@ -63,7 +66,5 @@ end
 
 # Delay wrapping prompt until fish_prompt event, ensures functions are loaded
 function __private_init --on-event fish_prompt
-    if set -q fish_private_mode
-        private_wrap_prompt
-    end
+    private_wrap_prompt
 end

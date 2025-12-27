@@ -1,16 +1,20 @@
-function private_icon_prompt --description "Show private mode indicator for prompt"
-    if not set -q private_active
-        return
+function private_icon_prompt --description "Show private and root mode indicator for prompt"
+    set -l icon ''
+
+    if test (id -u) -eq 0
+        set icon "$root_symbol$icon"
     end
 
-    set -l icon $private_symbol
+    if set -q private_active
+        set icon "$icon$private_symbol"
 
-    if test "$private_show_count" = true
-        set -l count (private_count)
-        if test $count -gt 1
-            set icon "$icon$count"
+        if test "$private_show_count" = true
+            set -l count (private_count)
+            if test $count -gt 1
+                set icon "$icon$count"
+            end
         end
     end
 
-    echo -n $icon' '
+    echo -n "$icon "
 end

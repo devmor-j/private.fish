@@ -39,29 +39,29 @@ set -U private_symbol "🔒"
 set -U private_show_count false
 ```
 
+If you need more space between emojies, add them on the variable itself.
+
 <!-- set -U private_fish_autoclear true -->
 
-### 🔒 Privacy Emojis
+### 🔒 Emojis
 
-Here are some emojis you can use for privacy indicators:
+Here are some emojis you can use for private mode:
 
 - 👻 **Ghost (default)**
 - 🔒 Lock
 - 🔑 Key
-- 🗝️ Old Key
-- 🔐 Closed Lock With Key
-- 🛡️ Shield
-- 🕵️‍♂️ Detective
-- 🕶️ Sunglasses / Incognito
-- 🏠 House / Private Space
-- 📝 Hidden Note
-- 🙈 See-No-Evil Monkey
-- 🐟 Fish
-- 🐠 Tropical Fish
 - 🐡 Pufferfish
-- 🐬 Dolphin
 - 🦈 Shark
 - 🐙 Octopus
+
+And some _root_ related emojies when in root mode:
+
+- 🔥 **Fire (default)**
+- ☠️ Skull
+- 🛡️ Shield
+- ⚡️ Lightning
+- 💥 Explosion
+- 👑 Crown
 
 ---
 
