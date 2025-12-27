@@ -37,11 +37,10 @@ You can override defaults by setting these variables in your Fish config (`confi
 ```fish
 set -U private_symbol "🔒"
 set -U private_show_count false
+set -U root_symbol "🔥"
 ```
 
 If you need more space between emojies, add them on the variable itself.
-
-<!-- set -U private_fish_autoclear true -->
 
 ### 🔒 Emojis
 
@@ -77,6 +76,8 @@ fish -P
 2. You’ll see the ghost icon `👻` in your prompt.
 3. If you have multiple commands recorded in the session and `private_show_count=true`, the icon will show the count, e.g., `👻3`.
 4. Each terminal is independent, so counts don’t interfere with each other.
+
+Note: Will show "🔥" icon (fire is default) when _root_ user is active. So you'd be more careful since you have full access.
 
 ## 📝 License
 
