@@ -1,15 +1,17 @@
 # Defaults
+# set -g, not -U: the plugin must not write universals into the user's
+# config, or uninstalling it would leave residue behind
 if not set -q private_symbol
-    set -U private_symbol "👻"
+    set -g private_symbol "👻"
 end
 if not set -q root_symbol
-    set -U root_symbol "🔥"
+    set -g root_symbol "🔥"
 end
 if not set -q private_show_count
-    set -U private_show_count true
+    set -g private_show_count true
 end
 if not set -q private_fish_autoclear
-    set -U private_fish_autoclear false
+    set -g private_fish_autoclear false
 end
 
 # State directory
@@ -63,6 +65,20 @@ if status --is-interactive
         end
     end
 end
+
+# Event handlers only register when their definition runs, and function
+# files are autoloaded on first call - which never happens for handlers
+# waiting on an event. Source them explicitly so they register at startup.
+function __private_load_handlers
+    for dir in $fish_function_path
+        for name in private_cleanup private_record
+            if test -f $dir/$name.fish
+                source $dir/$name.fish
+            end
+        end
+    end
+end
+__private_load_handlers
 
 # Delay wrapping prompt until fish_prompt event, ensures functions are loaded
 function __private_init --on-event fish_prompt

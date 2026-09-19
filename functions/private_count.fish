@@ -24,7 +24,12 @@ function private_count --description "Count active private Fish sessions (per-te
     end
 
     # Rewrite sessions file with only active PIDs (atomic-ish update)
-    printf "%s\n" $active_pids >$sessions_file
+    set -l n (count $active_pids)
+    if test $n -gt 0
+        printf "%s\n" $active_pids >$sessions_file
+    else
+        rm -f $sessions_file
+    end
 
-    echo (count $active_pids)
+    echo $n
 end

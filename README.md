@@ -1,86 +1,69 @@
-# 🕵️‍♂️ private.fish
+# private.fish
 
-A lightweight Fish shell extension to indicate **private mode** sessions in your prompt with a ghost icon 👻. Each terminal session is tracked independently, and the icon can show a per-terminal activity count.
+`private.fish` is a lightweight Fish shell extension that indicates **private mode** sessions in the prompt using a ghost icon 👻. Each terminal is tracked independently, displaying a per-terminal session count.
 
-## 🚀 Features
+## Features
 
 - **Private mode indicator**: Shows a ghost icon `👻` in the prompt for private Fish sessions.
-- **Per-terminal session tracking**: Counts actions/outputs **per terminal**, independent of other terminals.
-- **Customizable behavior** via universal variables: control symbol and count display.
-- **Automatic prompt wrapping**: Works with any Fish prompt without modifying it manually.
+- **Root mode indicator**: Shows a fire icon `🔥` in the prompt when running as root.
+- **Per-terminal session tracking**: Counts active private sessions **per terminal**, independent of other terminals.
+- **Customizable behavior** via variables: control symbol and count display.
+- **Works with any prompt**: the icon is added to your existing prompt automatically — no prompt changes needed.
 
 ---
 
-## ⚙️ Installation
+## Installation
 
-Install using [fisher](https://github.com/jorgebucaran/fisher):
+To install the `private.fish` plugin, use [Fisher](https://github.com/jorgebucaran/fisher) by running the following command:
 
 ```bash
 fisher install devmor-j/private.fish
 ```
 
-> Fish will automatically detect private mode and display the ghost icon in your prompt.
+> After installation, Fish will automatically detect private mode and display the ghost icon in your prompt.
 
 ---
 
-## 📝 Configuration / Defaults
+## Configuration / Defaults
 
-| Variable             | Default | Description                                  |
-| -------------------- | ------- | -------------------------------------------- |
-| `private_symbol`     | `👻`    | The icon used for private sessions.          |
-| `private_show_count` | `true`  | Show a numeric count next to the ghost icon. |
+| Variable              | Default | Description                                                |
+| --------------------- | ------- | ------------------------------------------------------------ |
+| `private_symbol`      | `👻`    | The icon used for private sessions.                        |
+| `root_symbol`         | `🔥`    | The icon prepended when running as root.                   |
+| `private_show_count`  | `true`  | Show a numeric count next to the ghost icon.               |
+| `private_fish_autoclear` | `false` | If true, records `echo` output and erases those lines on exit. |
 
-<!-- | `private_fish_autoclear` | `false` | If true, records outputs in a per-terminal log file. | -->
+### Configuration
 
-You can override defaults by setting these variables in your Fish config (`config.fish`) before loading `private.fish`. Example:
+To customize the behavior of `private.fish`, you can set the following variables in your Fish configuration file (`config.fish`) **before** loading the plugin. Here is an example:
 
 ```fish
 set -U private_symbol "🔒"
 set -U private_show_count false
-set -U root_symbol "🔥"
 ```
 
-If you need more space between emojies, add them on the variable itself.
-
-### 🔒 Emojis
-
-Here are some emojis you can use for private mode:
-
-- 👻 **Ghost (default)**
-- 🔒 Lock
-- 🔑 Key
-- 🐡 Pufferfish
-- 🦈 Shark
-- 🐙 Octopus
-
-And some _root_ related emojies when in root mode:
-
-- 🔥 **Fire (default)**
-- ☠️ Skull
-- 🛡️ Shield
-- ⚡️ Lightning
-- 💥 Explosion
-- 👑 Crown
+To increase the spacing between emojis, adjust the variables accordingly.
 
 ---
 
-## 💡 Usage
+## Usage
 
-1. Open a Fish terminal in private mode:
+Open a Fish terminal in private mode — you’ll see the ghost icon 👻 in your prompt:
 
 ```bash
 fish -P
 # or fish --private
 ```
 
-2. You’ll see the ghost icon `👻` in your prompt.
-3. If you have multiple commands recorded in the session and `private_show_count=true`, the icon will show the count, e.g., `👻3`.
-4. Each terminal is independent, so counts don’t interfere with each other.
+- If multiple private sessions share the same terminal and `private_show_count=true`, the icon shows the count, e.g., `👻3`.
+- Each terminal is independent, so counts don’t interfere with each other.
 
-Note: Will show "🔥" icon (fire is default) when _root_ user is active. So you'd be more careful since you have full access.
+**Note:** When the **root** user is active, the plugin will display a 🔥 icon by default to indicate increased privileges.
 
-## 📝 License
+## Known limitations
+
+- **Cross-user counts are separate**: a root and a non-root shell on the same terminal keep independent counts, because root lacks `XDG_RUNTIME_DIR` (dropped by sudo's `env_reset`) and falls back to its own state dir. A shared cross-user count is intentionally unsupported (`kill -0` EPERM and file permissions make it unsafe).
+
+## License
 
 MIT License. Free to use and modify.
-
-This plugin was developed with AI assistance; Expect bugs and compatibility issues until they are fixed.

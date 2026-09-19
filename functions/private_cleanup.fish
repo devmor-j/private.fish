@@ -14,8 +14,10 @@ function _private_cleanup --on-event fish_exit
     if test $private_fish_autoclear = true
         if test -f $private_buffer
             set -l lines (wc -l < $private_buffer)
-            for i in (seq $lines)
+            set -l i 0
+            while test $i -lt $lines
                 echo -ne "\033[1A\033[2K"
+                set i (math $i + 1)
             end
             rm $private_buffer
         end

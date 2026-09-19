@@ -16,5 +16,7 @@ function private_icon_prompt --description "Show private and root mode indicator
         end
     end
 
-    echo -n "$icon "
+    if test -n "$icon"
+        echo -n "$icon "
+    end
 end
